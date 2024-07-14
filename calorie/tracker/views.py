@@ -15,6 +15,7 @@ def home(request):
             api = json.loads(api_request.content)
             print(api_request.content)
         except Exception as e:
+            
             api = "oops! There was an error"
             print(e)
         return render(request, 'home.html', {'api': api})

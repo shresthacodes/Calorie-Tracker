@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from .secrets import Nutrition_Key
 
-from .secrets import Nutrition_Key
-
-
 def home(request):
     import json
     import requests

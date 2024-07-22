@@ -23,3 +23,4 @@ def home(request):
         return render(request, 'home.html', {'api': api})
     else:
         return render(request, "home.html", {'query': "Enter an valid query"})
+

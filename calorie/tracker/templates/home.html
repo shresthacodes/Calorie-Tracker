@@ -1,4 +1,5 @@
 {% load static %} {% load mathfilters %} {% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,8 +47,8 @@
           </div>
           {% else %}
           <h1>
-            {{ api.foods.0.food_name | capfirst}} has a total of
-            <strong>{{ api.foods.0.nf_calories }} Calories</strong>
+            {{api.foods.0.food_name|capfirst}} has a total of
+            <strong>{{api.foods.0.nf_calories}} Calories</strong>
             {% if api.foods.0.nf_calories > 200 %}
             <img
               src="{% static 'images/shocked.png' %}"
@@ -78,63 +79,62 @@
                     <li>
                       Carbohydrates:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_total_carbohydrate|floatformat:2
-                        }}</span
+                        >{{api.foods.0.nf_total_carbohydrate|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Cholesterol:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_cholesterol|floatformat:2 }}</span
+                        >{{api.foods.0.nf_cholesterol|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Saturated fat:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_saturated_fat|floatformat:2 }}</span
+                        >{{api.foods.0.nf_saturated_fat|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Total Fat:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_total_fat|floatformat:2 }}</span
+                        >{{api.foods.0.nf_total_fat|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Fiber Content:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_dietary_fiber|floatformat:2 }}</span
+                        >{{api.foods.0.nf_dietary_fiber|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Potassium:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_potassium|floatformat:2 }}</span
+                        >{{api.foods.0.nf_potassium|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Protein:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_protein|floatformat:2 }}</span
+                        >{{api.foods.0.nf_protein|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Sodium:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_sodium|floatformat:2 }}</span
+                        >{{api.foods.0.nf_sodium|floatformat:2}}</span
                       >
                     </li>
                     <li>
                       Sugar:
                       <span class="float-end"
-                        >{{ api.foods.0.nf_sugars|floatformat:2 }}</span
+                        >{{api.foods.0.nf_sugars|floatformat:2}}</span
                       >
                     </li>
                   </ul>
                 </div>
                 <div class="col-md-6 mb-5">
                   <h4 class="mt-3 mb-4">
-                    To burn {{ api.foods.0.nf_calories }} calories you will have
+                    To burn {{api.foods.0.nf_calories}} calories you will have
                     to
                   </h4>
                   <div class="d-flex align-items-center mb-5">
@@ -146,8 +146,7 @@
                       <p>
                         you will have to jog for
                         <strong
-                          >{{ (api.foods.0.nf_calories / 229 * 60)|floatformat:0
-                          }}</strong
+                          >{{api.foods.0.nf_calories|div:229|mul:60|floatformat:0}}</strong
                         >
                         Minutes
                       </p>
@@ -165,8 +164,7 @@
                       <p>
                         you will have to do Power Yoga for
                         <strong
-                          >{{ (api.foods.0.nf_calories / 223 * 60)|floatformat:0
-                          }}</strong
+                          >{{api.foods.0.nf_calories|div:223|mul:60|floatformat:0}}</strong
                         >
                         Minutes
                       </p>
@@ -184,8 +182,7 @@
                       <p>
                         you will have to lift weight for
                         <strong
-                          >{{ (api.foods.0.nf_calories / 483 * 60)|floatformat:0
-                          }}</strong
+                          >{{api.foods.0.nf_calories|div:483|mul:60|floatformat:0}}</strong
                         >
                         Minutes
                       </p>
@@ -203,8 +200,7 @@
                       <p>
                         you will have to brisk walk for
                         <strong
-                          >{{ (api.foods.0.nf_calories / 294 * 60)|floatformat:0
-                          }}</strong
+                          >{{api.foods.0.nf_calories|div:294|mul:60|floatformat:0}}</strong
                         >
                         Minutes
                       </p>
@@ -229,81 +225,81 @@
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          var ctx = document.getElementById('nutritionChart').getContext('2d');
-          var chart = new Chart(ctx, {
-              type: 'bar',
-              data: {
-                  labels: ['Carbohydrates', 'Cholesterol', 'Saturated fat', 'Total Fat', 'Fiber Content', 'Potassium', 'Protein', 'Sodium', 'Sugar'],
-                  datasets: [{
-                      label: 'Nutritional values of {{ api.foods.0.food_name | capfirst }}',
-                      data: [
-                          {{ api.foods.0.nf_total_carbohydrate|floatformat:2 }},
-                          {{ api.foods.0.nf_cholesterol|floatformat:2 }},
-                          {{ api.foods.0.nf_saturated_fat|floatformat:2 }},
-                          {{ api.foods.0.nf_total_fat|floatformat:2 }},
-                          {{ api.foods.0.nf_dietary_fiber|floatformat:2 }},
-                          {{ api.foods.0.nf_potassium|floatformat:2 }},
-                          {{ api.foods.0.nf_protein|floatformat:2 }},
-                          {{ api.foods.0.nf_sodium|floatformat:2 }},
-                          {{ api.foods.0.nf_sugars|floatformat:2 }}
-                      ],
-                      backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)'
-                      ],
-                      borderColor: [
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)',
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)'
-                      ],
-                      borderWidth: 1
-                  }]
+      document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('nutritionChart').getContext('2d');
+        var chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Carbohydrates', 'Cholesterol', 'Saturated fat', 'Total Fat', 'Fiber Content', 'Potassium', 'Protein', 'Sodium', 'Sugar'],
+            datasets: [{
+              label: 'Nutritional values of {{api.foods.0.food_name|capfirst}}',
+              data: [
+                {{api.foods.0.nf_total_carbohydrate|floatformat:2}},
+                {{api.foods.0.nf_cholesterol|floatformat:2}},
+                {{api.foods.0.nf_saturated_fat|floatformat:2}},
+                {{api.foods.0.nf_total_fat|floatformat:2}},
+                {{api.foods.0.nf_dietary_fiber|floatformat:2}},
+                {{api.foods.0.nf_potassium|floatformat:2}},
+                {{api.foods.0.nf_protein|floatformat:2}},
+                {{api.foods.0.nf_sodium|floatformat:2}},
+                {{api.foods.0.nf_sugars|floatformat:2}}
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.1)'
+                }
               },
-              options: {
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  scales: {
-                      y: {
-                          beginAtZero: true,
-                          grid: {
-                              color: 'rgba(0, 0, 0, 0.1)'
-                          }
-                      },
-                      x: {
-                          grid: {
-                              display: false
-                          }
-                      }
-                  },
-                  plugins: {
-                      legend: {
-                          display: true,
-                          position: 'top'
-                      },
-                      title: {
-                          display: true,
-                          text: 'Nutritional values of {{ api.foods.0.food_name | capfirst }}',
-                          font: {
-                              size: 16
-                          }
-                      }
-                  }
+              x: {
+                grid: {
+                  display: false
+                }
               }
-          });
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top'
+              },
+              title: {
+                display: true,
+                text: 'Nutritional values of {{api.foods.0.food_name|capfirst}}',
+                font: {
+                  size: 16
+                }
+              }
+            }
+          }
+        });
       });
     </script>
   </body>

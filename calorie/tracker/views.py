@@ -10,7 +10,7 @@ def home(request):
         query = request.POST['query']
         api_url = 'https://trackapi.nutritionix.com/v2/natural/nutrients'
         headers = {
-            'x-app-id': 'f39c08df',  # Replace with your actual App ID
+            'x-app-id': 'aeaa060e',  # Replace with your actual App ID
             'x-app-key': Nutrition_Key,
             'Content-Type': 'application/json'
         }
